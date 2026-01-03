@@ -35,6 +35,11 @@ const corsOptions = {
       return callback(null, true);
     }
     
+    // Allow AWS Amplify app
+    if (origin === 'https://main.d3w57ekmy7c72i.amplifyapp.com') {
+      return callback(null, true);
+    }
+    
     // Allow configured frontend URL
     if (origin === FRONTEND_URL) {
       return callback(null, true);
@@ -58,6 +63,7 @@ const io = new Server(server, {
       if (!origin) return callback(null, true);
       if (origin.endsWith('.trycloudflare.com')) return callback(null, true);
       if (origin === 'https://abhu.duckdns.org') return callback(null, true);
+      if (origin === 'https://main.d3w57ekmy7c72i.amplifyapp.com') return callback(null, true);
       if (origin === FRONTEND_URL) return callback(null, true);
       if (origin.includes('localhost') || origin.includes('127.0.0.1')) return callback(null, true);
       callback(new Error('Not allowed by CORS'));
@@ -137,6 +143,6 @@ app.use((err, req, res, next) => {
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`🌐 CORS enabled for: ${FRONTEND_URL}, https://abhu.duckdns.org and *.trycloudflare.com`);
+  console.log(`🌐 CORS enabled for: ${FRONTEND_URL}, https://abhu.duckdns.org, https://main.d3w57ekmy7c72i.amplifyapp.com and *.trycloudflare.com`);
   console.log(`🧭 Environment: ${process.env.NODE_ENV || 'development'}`);
 });
