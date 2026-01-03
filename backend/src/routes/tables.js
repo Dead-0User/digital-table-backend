@@ -140,7 +140,7 @@ router.post("/", async (req, res) => {
 
     // Update QR code URL with the actual table ID if not set
     if (!savedTable.qrCodeUrl) {
-      const frontendUrl = process.env.FRONTEND_URL || "http://localhost:8080";
+      const frontendUrl = process.env.FRONTEND_URL || "https://main.d3w57ekmy7c72i.amplifyapp.com";
       savedTable.qrCodeUrl = `${frontendUrl}/order/${savedTable._id}`;
       await savedTable.save();
     }
